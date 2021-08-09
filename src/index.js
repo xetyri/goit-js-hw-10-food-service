@@ -2,10 +2,10 @@ import './sass/main.scss';
 import menu from './js/menu.json';
 import itemsTemplate from './templates/gallery.hbs';
 
-const galleryRef = document.querySelector('.js-menu');
+const Gallery = document.querySelector('.js-menu');
 
 const markup = itemsTemplate(menu);
-galleryRef.insertAdjacentHTML('beforeend', markup);
+Gallery.insertAdjacentHTML('beforeend', markup);
 
 const Theme = {
     LIGHT: 'light-theme',
@@ -13,10 +13,10 @@ const Theme = {
   };
   
   document.body.classList.add(Theme.LIGHT);
-  const themeToggleBtnRef = document.querySelector('#theme-switch-toggle');
-  themeToggleBtnRef.addEventListener('change', onThemeToggle);
+  const ThemeToggle = document.querySelector('#theme-switch-toggle');
+  ThemeToggle.addEventListener('change', CheckTheme);
   
-  function onThemeToggle(e) {
+  function CheckTheme(e) {
     if (e.target.checked) {
       localStorage.setItem('theme', Theme.DARK);
     } else {
@@ -26,11 +26,11 @@ const Theme = {
     document.body.classList.toggle(Theme.DARK);
   }
   
-  function setThemeByLoadPage() {
+  function SetTheme() {
     const storageValue = localStorage.getItem('theme');
   
     if (storageValue === Theme.DARK) {
-      themeToggleBtnRef.checked = true;
+      ThemeToggle.checked = true;
       document.body.classList.add(Theme.DARK);
       document.body.classList.remove(Theme.LIGHT);
       return;
@@ -39,5 +39,5 @@ const Theme = {
     localStorage.setItem('theme', Theme.LIGHT);
   }
   
-  setThemeByLoadPage();
+  SetTheme();
   
